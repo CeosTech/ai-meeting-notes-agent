@@ -1,0 +1,11 @@
+{
+  "bucket": "ai-meeting-transcripts",
+  "key": "media/q1_allhands.mp4",
+  "content_type": "video",
+  "target_language": "en",
+  "email_locale": "en",
+  "participants": [
+    "participant1@example.com",
+    "participant2@example.com"
+  ]
+}

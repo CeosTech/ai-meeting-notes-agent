@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <linearGradient id="boxGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,3 L0,6 z" fill="#2563eb" />
+    </marker>
+    <style>
+      .box { fill: url(#boxGradient); stroke: #334155; stroke-width: 2.5; rx: 18; ry: 18; }
+      .title { font-size: 22px; font-weight: 600; fill: #1f2937; }
+      .text { font-size: 17px; fill: #4b5563; }
+      .arrow { stroke: #2563eb; stroke-width: 4; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <text x="600" y="60" text-anchor="middle" font-size="34" fill="#111827" font-weight="700">AI Meeting Notes Agent</text>
+
+  <rect class="box" x="70" y="140" width="220" height="180"/>
+  <text class="title" x="180" y="180" text-anchor="middle">Amazon S3</text>
+  <text class="text" x="180" y="215" text-anchor="middle">Uploads transcripts</text>
+  <text class="text" x="180" y="240" text-anchor="middle">or meeting recordings</text>
+
+  <rect class="box" x="330" y="120" width="260" height="220"/>
+  <text class="title" x="460" y="160" text-anchor="middle">AWS Lambda</text>
+  <text class="text" x="460" y="195" text-anchor="middle">Loads transcript or media</text>
+  <text class="text" x="460" y="220" text-anchor="middle">Invokes Transcribe/Bedrock</text>
+  <text class="text" x="460" y="245" text-anchor="middle">Translates summary</text>
+  <text class="text" x="460" y="270" text-anchor="middle">Sends localized email</text>
+
+  <rect class="box" x="660" y="110" width="220" height="240"/>
+  <text class="title" x="770" y="150" text-anchor="middle">AI Services</text>
+  <text class="text" x="770" y="185" text-anchor="middle">Amazon Transcribe</text>
+  <text class="text" x="770" y="210" text-anchor="middle">Amazon Bedrock</text>
+  <text class="text" x="770" y="235" text-anchor="middle">Amazon Translate</text>
+  <text class="text" x="770" y="260" text-anchor="middle">Amazon Comprehend</text>
+
+  <rect class="box" x="930" y="140" width="210" height="180"/>
+  <text class="title" x="1035" y="180" text-anchor="middle">Amazon SES</text>
+  <text class="text" x="1035" y="215" text-anchor="middle">HTML + text email</text>
+  <text class="text" x="1035" y="240" text-anchor="middle">Localized subject & intro</text>
+
+  <rect class="box" x="330" y="380" width="260" height="160"/>
+  <text class="title" x="460" y="420" text-anchor="middle">AgentCore</text>
+  <text class="text" x="460" y="455" text-anchor="middle">Orchestrates autonomous flow</text>
+  <text class="text" x="460" y="480" text-anchor="middle">Exposes agent endpoint</text>
+
+  <rect class="box" x="700" y="380" width="260" height="160"/>
+  <text class="title" x="830" y="420" text-anchor="middle">Participants</text>
+  <text class="text" x="830" y="455" text-anchor="middle">Receive multilingual summary</text>
+  <text class="text" x="830" y="480" text-anchor="middle">and action items</text>
+
+  <line class="arrow" x1="290" y1="230" x2="330" y2="230" />
+  <line class="arrow" x1="590" y1="230" x2="660" y2="230" />
+  <line class="arrow" x1="880" y1="230" x2="930" y2="230" />
+  <line class="arrow" x1="1035" y1="320" x2="1035" y2="380" />
+  <line class="arrow" x1="460" y1="340" x2="460" y2="380" />
+  <line class="arrow" x1="590" y1="460" x2="700" y2="460" />
+</svg>

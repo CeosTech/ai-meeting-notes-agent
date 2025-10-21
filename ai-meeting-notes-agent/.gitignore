@@ -1,0 +1,14 @@
+# Virtual env
+venv/
+__pycache__/
+*.pyc
+
+# Credentials
+.env
+
+# IDE
+.vscode/
+.DS_Store
+
+# AWS Lambda
+lambda.zip

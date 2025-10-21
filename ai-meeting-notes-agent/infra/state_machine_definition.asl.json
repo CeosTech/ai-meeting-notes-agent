@@ -1,0 +1,118 @@
+{
+  "Comment": "AI Meeting Notes asynchronous processing pipeline",
+  "StartAt": "AcquireTranscript",
+  "States": {
+    "AcquireTranscript": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:294337989685:function:acquire_transcript",
+      "ResultPath": "$",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "MaxAttempts": 2,
+          "IntervalSeconds": 10,
+          "BackoffRate": 2.0
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "ResultPath": "$",
+          "Next": "HandleFailure"
+        }
+      ],
+      "Next": "Summarize"
+    },
+    "Summarize": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:294337989685:function:SummarizeTaskFn",
+      "ResultPath": "$",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "MaxAttempts": 2,
+          "IntervalSeconds": 5,
+          "BackoffRate": 2.0
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "ResultPath": "$",
+          "Next": "HandleFailure"
+        }
+      ],
+      "Next": "ShouldTranslate"
+    },
+    "ShouldTranslate": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.target_language",
+          "IsPresent": true,
+          "Next": "Translate"
+        }
+      ],
+      "Default": "SendEmail"
+    },
+    "Translate": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:294337989685:function:TranslateTaskFn",
+      "ResultPath": "$",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "MaxAttempts": 1,
+          "IntervalSeconds": 5
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "ResultPath": "$",
+          "Next": "HandleFailure"
+        }
+      ],
+      "Next": "SendEmail"
+    },
+    "SendEmail": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:294337989685:function:SendEmailTaskFn",
+      "ResultPath": "$",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "MaxAttempts": 1,
+          "IntervalSeconds": 5
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "ResultPath": "$",
+          "Next": "HandleFailure"
+        }
+      ],
+      "Next": "Finalize"
+    },
+    "Finalize": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:294337989685:function:FinalizeTaskFn",
+      "ResultPath": "$",
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "ResultPath": "$",
+          "Next": "HandleFailure"
+        }
+      ],
+      "End": true
+    },
+    "HandleFailure": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:294337989685:function:HandleFailureFn",
+      "ResultPath": "$",
+      "End": true
+    }
+  }
+}
