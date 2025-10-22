@@ -1,0 +1,15 @@
+version: 1.0
+runtime: python3
+build:
+  commands:
+    - pip install --no-cache-dir -r requirements.txt
+run:
+  command: python -m uvicorn app:app --host 0.0.0.0 --port 8080
+  network:
+    port: 8080
+  health_check:
+    path: /-/health
+    interval: 5
+    timeout: 2
+    healthy_threshold: 1
+    unhealthy_threshold: 3
